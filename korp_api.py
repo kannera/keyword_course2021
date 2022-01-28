@@ -1,4 +1,4 @@
-pip install wget
+!pip install wget
 import wget
 
 URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=1+sentence&cache=true"
