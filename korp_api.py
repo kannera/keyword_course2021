@@ -9,4 +9,7 @@ URL_QUERY = "cqp=QUERY"
 
 def query_frequencies(lemma, groupby):
   url = "&".join([URL_COM.replace("COMMAND", "count"), URL_GROUPBY.replace("GROUPBY", groupby), URL_CORPUS_KLK, URL_QUERY.replace(QUERY, '[lemma="'+lemma+'"]'), URL_ENDBITS])
-  !wget '"'+url+'"' -O 
+  !wget $url -O tmp.json
+  with open("tmp.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+  print(data.keys())
