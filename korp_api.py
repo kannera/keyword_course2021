@@ -9,7 +9,7 @@ URL_ENDBITS =  "context=&incremental=true&defaultwithin=sentence&within=&loginfo
 URL_QUERY = "cqp=QUERY"
 
 def query_frequencies(lemma, groupby, corpus):
-  url_bit = [URL_COM.replace("COMMAND", "count"), URL_GROUPBY.replace("GROUPBY", groupby), URL_QUERY.replace("QUERY", "%5Blemma+%3D+%22"+lemma+"%22%5D"), URL_ENDBITS]
+  url_bits = [URL_COM.replace("COMMAND", "count"), URL_GROUPBY.replace("GROUPBY", groupby), URL_QUERY.replace("QUERY", "%5Blemma+%3D+%22"+lemma+"%22%5D"), URL_ENDBITS]
   if corpus == "klk":
     url_bits.append(URL_CORPUS_KLK)
   elif corpus == "suomi24":
