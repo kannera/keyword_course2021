@@ -18,8 +18,5 @@ def query_frequencies(lemma, groupby, corpus):
   elif corpus == "suomi24":
     url_bits.appedn(URL_CORPUS_S24)
   url = "&".join(url_bits)
-  !wget "$url" -O tmp.json
-  with open("tmp.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-  os.remove("tmp.json")
-  return data
+  return url
+
