@@ -1,3 +1,5 @@
+import urllib
+
 URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=1+sentence&cache=true"
 URL_GROUPBY = "groupby=GROUPBY"
 URL_SHOW = "show=sentence.paragraph.lemma(.comp).pos.msd.dep(head.rel).ref"
@@ -8,8 +10,8 @@ URL_CORPUS_S24 = "corpus=S24_200%281.2.3.4.5.6.7.8.9%29.S24_201%280.1.2.3.4.5.6.
 URL_ENDBITS =  "context=&incremental=true&defaultwithin=sentence&within=&loginfo=lang%3Dfi+search%3Dadv"
 URL_QUERY = "cqp=QUERY"
 
-def query_frequencies(lemma, groupby, corpus):
-  url_bits = [URL_COM.replace("COMMAND", "count"), URL_GROUPBY.replace("GROUPBY", groupby), URL_QUERY.replace("QUERY", "%5Blemma+%3D+%22"+lemma+"%22%5D"), URL_ENDBITS]
+def query_frequencies(query, groupby, corpus):
+  url_bits = [URL_COM.replace("COMMAND", "count"), URL_GROUPBY.replace("GROUPBY", groupby), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
   if corpus == "klk":
     url_bits.append(URL_CORPUS_KLK)
   elif corpus == "suomi24":
