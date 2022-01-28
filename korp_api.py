@@ -1,6 +1,3 @@
-!pip install wget
-import wget
-
 URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=1+sentence&cache=true"
 URL_GROUPBY = "groupby=GROUPBY"
 URL_SHOW = "show=sentence.paragraph.lemma(.comp).pos.msd.dep(head.rel).ref"
