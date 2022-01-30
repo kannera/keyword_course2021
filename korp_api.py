@@ -22,6 +22,12 @@ def query_frequencies(query, groupby, corpus):
     url_bits.append(URL_CORPUS_KLK)
   elif corpus == "suomi24":
     url_bits.append(URL_CORPUS_S24)
+  elif corpus == "globwe":
+    url_bits.append(URL_CORPUS_GLOBWE)
+  elif corpus == "coca":
+    url_bits.append(URL_CORPUS_COCA)
+  elif corpus == "coha":
+    url_bits.append(URL_CORPUS_COHA)
   url = "&".join(url_bits)
   return url
 
