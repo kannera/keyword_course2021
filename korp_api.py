@@ -20,6 +20,15 @@ URL_CORPUS_COCA = "corpus=COCA_(FIC.MAG.NEWS.ACAD.SPOK)"
 URL_ENDBITS =  "context=&incremental=true&defaultwithin=sentence&within=&loginfo=lang%3Dfi+search%3Dadv"
 URL_QUERY = "cqp=QUERY"
 
+def add_date_columns_for_klk(df):
+  df['date'] = df['text_issue_date'].apply(lambda x:parse_date(x) if x.count(".") == 2 else "no date")
+  df['text_issue_date'] = df['text_issue_date'].apply(lambda x: "01."+x if x.count(".") == 0 else x)
+  df['text_issue_date'] = df['text_issue_date'].apply(lambda x: "01."+x if x.count(".") == 1 else x)
+  df['month_date'] = df['text_issue_date'].apply(lambda x:x.split(".")[-1]+"-"+x.split(".")[1]+"-01")
+  df['year'] = df['text_issue_date'].apply(lambda x:x.split(".")[-1])
+  
+  return df
+
 def query_frequencies(query, groupby, corpus):
   url_bits = [URL_COM.replace("COMMAND", "count"), URL_GROUPBY.replace("GROUPBY", groupby), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
   if corpus == "klk":
