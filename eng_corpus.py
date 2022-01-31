@@ -1,3 +1,5 @@
+import wget
+
 def get_data_from_github(corpus):
   if corpus == "coha":
     file_names = ["fic_1.txt","fic_2.txt","mag_1.txt","mag_2.txt","news_1.txt","news_2.txt","nf_1.txt","nf_2.txt"]
