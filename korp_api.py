@@ -1,4 +1,7 @@
 import urllib
+import pandas
+import wget
+import os
 
 URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=1+sentence&cache=true"
 URL_GROUPBY = "groupby=GROUPBY"
@@ -31,3 +34,22 @@ def query_frequencies(query, groupby, corpus):
   url = "&".join(url_bits)
   return url
 
+def download(url):
+  wget.download(url, out="tmp.json")
+  with open("tmp.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+  os.remove("tmp.json")
+  return data
+
+def parse_date(x):
+  x = x.split(".")
+  return x[-1]+"-"+x[1]+"-"+x[0]
+
+def get_frequency_data_from_korp(query, groupby, corpus):
+  url = query_frequencies(query, groupby, corpus)
+  data = download(url)
+  
+  data = [{groupby:k, "rel_frequency":v, "abs_frequency":data['total']['absolute'][k]} for k,v in data['total']['relative'].items()]
+  
+  df = pandas.DataFrame(df)
+  return
