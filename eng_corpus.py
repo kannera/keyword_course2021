@@ -26,7 +26,7 @@ def get_data_from_github(corpus):
   with codecs.open(tmp, "r", encoding="utf-8", errors="replace") as f:
     metadata = [x[:-1].split("\t") for x in f]
   os.remove(tmp)
-  #print(metadata)
+  
   metadata = {x[0]:{metadata_keys[i]:x[i] for i in range(1, len(metadata_keys))} for x in metadata}
 
   print("this done")
@@ -37,9 +37,9 @@ def get_data_from_github(corpus):
       data.extend([x[:-1].replace("@@","").split("\t") for x in f])
 
   df = pandas.DataFrame(data)
-  print(df)
+  
   df.columns = [x for x in ["text_id", "word", "lemma", "x1", "x2"][:df.shape[1]]]
-  print(df)
+  
   for key in metadata_keys[1:]:
     df[key] = df["text_id"].apply(lambda x:metadata[x][key])
 
