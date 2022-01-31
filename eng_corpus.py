@@ -1,6 +1,7 @@
 import wget
 import pandas
 import codecs
+import os
 
 def get_data_from_github(corpus):
   if corpus == "coha":
