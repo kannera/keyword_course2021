@@ -52,5 +52,5 @@ def get_frequency_data_from_korp(query, groupby, corpus):
   
   data = [{groupby:k, "rel_frequency":v, "abs_frequency":data['total']['absolute'][k]} for k,v in data['total']['relative'].items()]
   
-  df = pandas.DataFrame(df)
+  df = pandas.DataFrame(data)
   return
