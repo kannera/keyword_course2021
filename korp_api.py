@@ -2,6 +2,7 @@ import urllib
 import pandas
 import wget
 import os
+import json
 
 URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=1+sentence&cache=true"
 URL_GROUPBY = "groupby=GROUPBY"
