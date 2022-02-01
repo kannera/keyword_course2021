@@ -45,10 +45,11 @@ def query_frequencies(query, groupby, corpus):
   return url
 
 def download(url):
-  wget.download(url, out="tmp.json")
+  tmp = wget.download(url, out="tmp.json")
   with open("tmp.json", "r", encoding="utf-8") as f:
     data = json.load(f)
   os.remove("tmp.json")
+  os.remove(tmp)
   return data
 
 def parse_date(x):
