@@ -26,6 +26,7 @@ def get_data_from_github(corpus):
   with codecs.open(tmp, "r", encoding="utf-8", errors="replace") as f:
     metadata = [x[:-1].split("\t") for x in f]
   os.remove(tmp)
+  os.remove("tmp.json")
   
   metadata = {x[0]:{metadata_keys[i]:x[i] for i in range(1, len(metadata_keys))} for x in metadata}
 
@@ -35,6 +36,8 @@ def get_data_from_github(corpus):
     tmp = wget.download(root_path+fn, out="tmp.json")
     with codecs.open(tmp, "r", encoding="utf-8", errors="replace") as f:
       data.extend([x[:-1].replace("@@","").split("\t") for x in f])
+    os.remove("tmp.json")
+    os.remove(tmp)
 
   df = pandas.DataFrame(data)
   
