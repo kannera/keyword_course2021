@@ -3,6 +3,14 @@ import pandas
 import codecs
 import os
 
+def get_kwic(data, lemma, title, rang):
+  indices = data[(data.lemma == lemma) & (data.title==title)].index
+  for i in indices:
+    line = []
+    for ii in range(i-rang, i+rang):
+        line.append(data['lemma'].iloc[ii])
+    print(" ".join(line))
+
 def get_data_from_github(corpus):
   if corpus == "coha":
     file_names = ["fic_1.txt","fic_2.txt","mag_1.txt","mag_2.txt","news_1.txt","news_2.txt","nf_1.txt","nf_2.txt"]
