@@ -48,7 +48,7 @@ def download(url):
   tmp = wget.download(url, out="tmp.json")
   with open("tmp.json", "r", encoding="utf-8") as f:
     data = json.load(f)
-  os.remove("tmp.json")
+  #os.remove("tmp.json")
   os.remove(tmp)
   return data
 
