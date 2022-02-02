@@ -4,6 +4,50 @@ from scipy.stats import binom
 import codecs
 import os
 
+def pmi(X):
+  w1 = X['w1']
+  w2 = X['w2']
+  w12 = X['w12']
+  tf = X['tf']
+
+  return numpy.log((w12/tf)/((w1/tf)*(w2/tf)))
+
+def bd(k, n, p):
+  return binom.logpmf(k, n, p)
+
+def llr(X):
+
+  w1 = X['w1']
+  w2 = X['w2']
+  w12 = X['w12']
+  tf = X['tf']
+
+  p = w2/tf
+  p1 = w12/w1
+  p2 = (w2-w12)/(tf-w1)
+
+  bn1 = bd(w12, w1, p)
+  bn2 = bd(w2-w12, tf-w1, p)
+  bn3 = bd(w12, w1, p1)
+  bn4 = bd(w2-w12, tf-w1, p2)
+  return -2*(bn1+bn2-bn3-bn4)
+
+def t_test(X):
+  w1 = X['w1']
+  w2 = X['w2']
+  w12 = X['w12']
+  tf = X['tf']
+
+  p1 = w1/tf
+  p2 = w2/tf
+  p0 = p1 * p2
+
+  ps  = w12/tf
+
+  score = (ps - p0) / numpy.sqrt((ps/tf))
+
+  return score
+
 def get_kwic(data, lemma, title, rang):
   indices = data[(data.lemma == lemma) & (data.title==title)].index
   for i in indices:
