@@ -10,6 +10,21 @@ def get_kwic(data, lemma, title, rang):
     for ii in range(i-rang, i+rang):
         line.append(data['lemma'].iloc[ii])
     print(" ".join(line))
+
+ def build_collocations(data, frequencies, lemma, rang):
+
+  collocations = list_collocations(data, lemma, rang)
+  collocations = collocations.groupby('lemma').count()
+  tf = data.shape[0]
+
+  collocations['w12'] = collocations['word']
+  collocations['w2'] = frequencies
+  collocations['tf'] = tf
+  collocations['w1'] = frequencies.loc[lemma]
+  collocations['pmi'] = collocations.apply(pmi, axis=1)
+  collocations['llr'] = collocations.apply(llr, axis=1)
+  collocations['t-test'] = collocations.apply(t_test, axis=1)
+  return collocations
     
 def build_data_for_collocations(corpus, crop):
   data = get_data_from_github(corpus)
