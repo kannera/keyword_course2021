@@ -10,6 +10,13 @@ def get_kwic(data, lemma, title, rang):
     for ii in range(i-rang, i+rang):
         line.append(data['lemma'].iloc[ii])
     print(" ".join(line))
+    
+def build_data_for_collocations(corpus, crop):
+  data = get_data_from_github(corpus)
+  if crop != "":
+    data = data[(data[crop.split(":")[0]] == crop.split(":")[1])]
+  frequencies = data.groupby('lemma').count()['word']
+  return data, frequencies
 
 def get_data_from_github(corpus):
   if corpus == "coha":
