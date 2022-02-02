@@ -56,7 +56,7 @@ def get_kwic(data, lemma, title, rang):
         line.append(data['lemma'].iloc[ii])
     print(" ".join(line))
 
- def build_collocations(data, frequencies, lemma, rang):
+def build_collocations(data, frequencies, lemma, rang):
 
   collocations = list_collocations(data, lemma, rang)
   collocations = collocations.groupby('lemma').count()
