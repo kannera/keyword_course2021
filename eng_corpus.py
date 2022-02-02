@@ -1,5 +1,6 @@
 import wget
-import pandas
+import pandas, numpy
+from scipy.stats import binom
 import codecs
 import os
 
