@@ -31,7 +31,7 @@ def query_full_corpus_sizes(corpus):
     return data
   
   if corpus == "suomi24":
-    url = query_frequencies("", 'text_topic_name_leaf', "klk")
+    url = query_frequencies("", 'text_topic_name_leaf', "suomi24")
     url = url.replace("count", "count_all")
     print(url)
     data = download(url)['total']['absolute']
