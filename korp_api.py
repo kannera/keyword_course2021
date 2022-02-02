@@ -58,12 +58,13 @@ def parse_date(x):
 
 def get_frequency_data_from_korp(query, groupby, corpus):
   
-  url = query_frequencies(query, groupby, corpus)
+  url = query_frequencies(query, groupby, corpus, sums=False)
   if groupby == "":
     url = url.replace("count", "count_all")
   data = download(url)
-  
-  data = [{groupby:k, "rel_frequency":v, "abs_frequency":data['total']['absolute'][k]} for k,v in data['total']['relative'].items()]
-  
-  df = pandas.DataFrame(data)
+  if sums:
+    return {"abs_frequency":data['total']['sums']['absolute'], "rel_frequency":data['total']['sums']['relative']}
+  else:
+    data = [{groupby:k, "rel_frequency":v, "abs_frequency":data['total']['absolute'][k]} for k,v in data['total']['relative'].items()]
+    df = pandas.DataFrame(data)
   return df
