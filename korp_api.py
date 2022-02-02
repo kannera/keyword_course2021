@@ -80,3 +80,24 @@ def get_frequency_data_from_korp(query, groupby, corpus, sums=False):
     return add_date_columns_for_klk(df)
   else:
     return df
+
+def read_occurrences(query, corpus,n):
+  url = query_occurrences(query, corpus, n)
+  data = download(url)
+  print(data)
+  return data["kwic"]
+
+def query_occurrences(query, corpus, n):
+  url_bits = [URL_COM.replace("COMMAND", "query"), URL_STRUCT_KLK, URL_START_END.replace("END", str(n)).replace("START", "0"), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
+  if corpus == "klk":
+    url_bits.append(URL_CORPUS_KLK)
+  elif corpus == "suomi24":
+    url_bits.append(URL_CORPUS_S24)
+  elif corpus == "globwe":
+    url_bits.append(URL_CORPUS_GLOBWE)
+  elif corpus == "coca":
+    url_bits.append(URL_CORPUS_COCA)
+  elif corpus == "coha":
+    url_bits.append(URL_CORPUS_COHA)
+  url = "&".join(url_bits)
+  return url
