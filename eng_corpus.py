@@ -73,6 +73,7 @@ def build_collocations(data, frequencies, lemma, rang):
     
 def list_collocations(data, lemma, rang):
   lemma_data = data[data.lemma == lemma]
+  texts = lemma_data['text_id'].unique()
   indices = lemma_data.index
   colloc_data = data[data.text_id.isin(texts)]
   set_indices = set(indices)
