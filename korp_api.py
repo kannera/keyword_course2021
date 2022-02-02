@@ -26,6 +26,7 @@ def add_date_columns_for_klk(df):
   df['text_issue_date'] = df['text_issue_date'].apply(lambda x: "01."+x if x.count(".") == 1 else x)
   df['month_date'] = df['text_issue_date'].apply(lambda x:x.split(".")[-1]+"-"+x.split(".")[1]+"-01")
   df['year'] = df['text_issue_date'].apply(lambda x:x.split(".")[-1])
+  df['decade'] = df['year'].apply(lambda x:x[:-1]+"0")
   
   return df
 
