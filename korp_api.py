@@ -87,7 +87,7 @@ def get_frequency_data_from_korp(query, groupby, corpus, sums=False):
   else:
     data = [{groupby:k, "rel_frequency":v, "abs_frequency":data['total']['absolute'][k]} for k,v in data['total']['relative'].items()]
     df = pandas.DataFrame(data)
-  if corpus == "klk":
+  if corpus == "klk" and "text_issue_date" in df.columns:
     return add_date_columns_for_klk(df)
   else:
     return df
