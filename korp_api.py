@@ -60,7 +60,7 @@ def get_frequency_data_from_korp(query, groupby, corpus):
   
   url = query_frequencies(query, groupby, corpus)
   if groupby == "":
-    url.replace("count", "count_all")
+    url = url.replace("count", "count_all")
   data = download(url)
   
   data = [{groupby:k, "rel_frequency":v, "abs_frequency":data['total']['absolute'][k]} for k,v in data['total']['relative'].items()]
