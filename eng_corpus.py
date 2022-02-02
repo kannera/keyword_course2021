@@ -53,7 +53,7 @@ def get_kwic(data, lemma, title, rang):
   for i in indices:
     line = []
     for ii in range(i-rang, i+rang):
-        line.append(data['lemma'].iloc[ii])
+      line.append(data['lemma'].iloc[ii])
     print(" ".join(line))
 
 def build_collocations(data, frequencies, lemma, rang):
