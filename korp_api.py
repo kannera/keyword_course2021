@@ -56,11 +56,9 @@ def parse_date(x):
   x = x.split(".")
   return x[-1]+"-"+x[1]+"-"+x[0]
 
-def get_frequency_data_from_korp(query, groupby, corpus):
+def get_frequency_data_from_korp(query, groupby, corpus, sums=False):
   
-  url = query_frequencies(query, groupby, corpus, sums=False)
-  if groupby == "":
-    url = url.replace("count", "count_all")
+  url = query_frequencies(query, groupby, corpus)
   data = download(url)
   if sums:
     return {"abs_frequency":data['total']['sums']['absolute'], "rel_frequency":data['total']['sums']['relative']}
