@@ -71,6 +71,17 @@ def get_kwic(data, lemma, title, rang):
   collocations['t-test'] = collocations.apply(t_test, axis=1)
   return collocations
     
+def list_collocations(data, lemma, rang):
+  lemma_data = data[data.lemma == lemma]
+  indices = lemma_data.index
+  colloc_data = data[data.text_id.isin(texts)]
+  set_indices = set(indices)
+  max_index = max(data.index)
+  colloc_indices = []
+  colloc_indices = [list(range(max(0,i-rang), min(i+rang, max_index))) for i in set_indices]
+  colloc_indices = list(set([ii for i in colloc_indices for ii in i]))
+  return colloc_data[colloc_data.index.isin(colloc_indices)]
+    
 def build_data_for_collocations(corpus, crop):
   data = get_data_from_github(corpus)
   if crop != "":
