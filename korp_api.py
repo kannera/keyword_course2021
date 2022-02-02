@@ -20,6 +20,16 @@ URL_CORPUS_COCA = "corpus=COCA_(FIC.MAG.NEWS.ACAD.SPOK)"
 URL_ENDBITS =  "context=&incremental=true&defaultwithin=sentence&within=&loginfo=lang%3Dfi+search%3Dadv"
 URL_QUERY = "cqp=QUERY"
 
+def query_full_corpus_sizes(corpus):
+  if corpus == "klk":
+    url = query_frequencies("", "text_issue_date", "klk")
+    url = url.replace("count", "count_all")
+    data = download(url)['total']['absolute']
+    data = [{"text_issue_date":k, "frequency":v} for k,v in data.items()]
+    data = pandas.DataFrame(data)
+    data = add_date_columns_for_klk(data)
+    return data
+
 def add_date_columns_for_klk(df):
   df['date'] = df['text_issue_date'].apply(lambda x:parse_date(x) if x.count(".") == 2 else "no date")
   df['text_issue_date'] = df['text_issue_date'].apply(lambda x: "01."+x if x.count(".") == 0 else x)
