@@ -27,7 +27,8 @@ def query_full_corpus_sizes(corpus):
     data = download(url)['total']['absolute']
     data = [{"text_issue_date":k, "frequency":v} for k,v in data.items()]
     data = pandas.DataFrame(data)
-    data = add_date_columns_for_klk(data)
+    if "text_issue_date" in data.columns
+      data = add_date_columns_for_klk(data)
     return data
   
   if corpus == "suomi24":
