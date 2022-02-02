@@ -33,6 +33,7 @@ def query_full_corpus_sizes(corpus):
   if corpus == "suomi24":
     url = query_frequencies("", 'text_topic_name_leaf', "klk")
     url = url.replace("count", "count_all")
+    print(url)
     data = download(url)['total']['absolute']
     data = [{'text_topic_name_leaf':k, "frequency":v} for k,v in data.items()]
     data = pandas.DataFrame(data)
