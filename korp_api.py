@@ -29,6 +29,15 @@ def query_full_corpus_sizes(corpus):
     data = pandas.DataFrame(data)
     data = add_date_columns_for_klk(data)
     return data
+  
+  if corpus == "suomi24":
+    url = query_frequencies("", 'text_topic_name_leaf', "klk")
+    url = url.replace("count", "count_all")
+    data = download(url)['total']['absolute']
+    data = [{'text_topic_name_leaf':k, "frequency":v} for k,v in data.items()]
+    data = pandas.DataFrame(data)
+    data = add_date_columns_for_klk(data)
+    return data
 
 def add_date_columns_for_klk(df):
   df['date'] = df['text_issue_date'].apply(lambda x:parse_date(x) if x.count(".") == 2 else "no date")
