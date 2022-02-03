@@ -3,6 +3,7 @@ import pandas
 import wget
 import os
 import json
+import codecs
 
 URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=DEFAULT_CONTEXT&cache=true"
 URL_GROUPBY = "groupby=GROUPBY"
@@ -73,7 +74,7 @@ def query_frequencies(query, groupby, corpus, allfr=False):
 
 def download(url):
   tmp = wget.download(url, out="tmp.json")
-  with open("tmp.json", "r", encoding="utf-8") as f:
+  with codecs.open("tmp.json", "r", encoding="utf-8", errors="replace") as f:
     data = json.load(f)
   #os.remove("tmp.json")
   os.remove(tmp)
