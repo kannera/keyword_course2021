@@ -4,6 +4,9 @@ import wget
 import os
 import json
 import codecs
+import numpy
+from scipy.stats import binom
+
 
 URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=DEFAULT_CONTEXT&cache=true"
 URL_GROUPBY = "groupby=GROUPBY"
