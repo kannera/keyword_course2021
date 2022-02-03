@@ -20,9 +20,9 @@ URL_CORPUS_COCA = "corpus=COCA_(FIC.MAG.NEWS.ACAD.SPOK)"
 URL_ENDBITS =  "context=&incremental=true&defaultwithin=sentence&within=&loginfo=lang%3Dfi+search%3Dadv"
 URL_QUERY = "cqp=QUERY"
 
-def query_full_corpus_sizes(corpus):
+def query_full_corpus_sizes(corpus, query=""):
   if corpus == "klk":
-    url = query_frequencies("", "text_issue_date", "klk")
+    url = query_frequencies(query, "text_issue_date", "klk")
     url = url.replace("count", "count_all")
     data = download(url)['total']['absolute']
     data = [{"text_issue_date":k, "frequency":v} for k,v in data.items()]
