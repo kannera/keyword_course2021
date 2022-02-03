@@ -99,7 +99,7 @@ def read_occurrences(query, corpus,n):
   print(data)
   return data["kwic"]
 
-def query_occurrences(query, corpus, n, start=0, context="1+sentence"):
+def query_occurrences(query, corpus, n, start=0, context="1+sentence", show=""):
   url_bits = [URL_COM.replace("COMMAND", "query").replace("DEFAULT_CONTEXT",context), URL_SHOW.replace("SHOW", show), URL_STRUCT_KLK, URL_START_END.replace("END", str(n)).replace("START", str(start)), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
   if corpus == "klk":
     url_bits.append(URL_CORPUS_KLK)
