@@ -4,7 +4,7 @@ import wget
 import os
 import json
 
-URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=1+sentence&cache=true"
+URL_COM = "https://korp.csc.fi/cgi-bin/korp/korp.cgi?command=COMMAND&defaultcontext=DEFAULT_CONTEXT&cache=true"
 URL_GROUPBY = "groupby=GROUPBY"
 URL_SHOW = "show=sentence.paragraph.lemma(.comp).pos.msd.dep(head.rel).ref"
 URL_STRUCT_KLK = "show_struct=text_label.text_publ_(title.id).text_issue_(date.no.title).text_(elec_date.language.page_no.sentcount.tokencount.img_url.publ_type).paragraph_id.sentence_(id.parse_state.local_id).text_binding_id.text_page_image_(url.context_url).text_download_pdf_url"
@@ -98,8 +98,8 @@ def read_occurrences(query, corpus,n):
   print(data)
   return data["kwic"]
 
-def query_occurrences(query, corpus, n):
-  url_bits = [URL_COM.replace("COMMAND", "query"), URL_STRUCT_KLK, URL_START_END.replace("END", str(n)).replace("START", "0"), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
+def query_occurrences(query, corpus, n, context="1+sentence"):
+  url_bits = [URL_COM.replace("COMMAND", "query").replace("DEFAULT_CONTEXT",context), URL_STRUCT_KLK, URL_START_END.replace("END", str(n)).replace("START", "0"), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
   if corpus == "klk":
     url_bits.append(URL_CORPUS_KLK)
   elif corpus == "suomi24":
