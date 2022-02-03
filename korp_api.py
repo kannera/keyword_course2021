@@ -58,6 +58,7 @@ def build_frequency_table_for_s24():
     print(source_root_url+str(i)+".json")
     data = download(source_root_url+str(i)+".json")
     res[i] = data
+  print(query_frequencies("", "text_empty", "s24").replace("count", "count_all"))
   tf = sum(download(query_frequencies("", "text_empty", "s24").replace("count", "count_all"))['total']['absolute'].values())
   return pandas.DataFrame(res).fillna(1).sum(axis=1), tf
 
