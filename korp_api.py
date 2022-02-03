@@ -24,6 +24,51 @@ URL_CORPUS_COCA = "corpus=COCA_(FIC.MAG.NEWS.ACAD.SPOK)"
 URL_ENDBITS =  "context=&incremental=true&defaultwithin=sentence&within=&loginfo=lang%3Dfi+search%3Dadv"
 URL_QUERY = "cqp=QUERY"
 
+def list_collocations(lemma, corpus, rang, crop=[]):
+  print(type(crop))
+  if type(crop) == str: 
+    crop=[crop]
+  query = '[lemma="'+lemma+'"'+' & '.join([x.split(":")[0]+'='+'"'+x.split(":")[1]+'"' for x in crop])+']'
+  print(query)
+  count_occurrences = download(query_occurrences(query, corpus, "1"))['hits']
+  collocations = []
+  for i in range(0, count_occurrences, 100000):
+    t0 = time.time()
+    start = i
+    end = min(count_occurrences, start+99999)
+    url = query_occurrences(query, corpus, end, start=start, context=str(rang)+'+words', show="lemma")
+    occurrences = download(url)['kwic']
+    collocations.extend([y['lemma'] for x in occurrences for y in x['tokens']])
+    print(time.time()-t0)
+  
+
+  collocations = collections.Counter(collocations)
+  return pandas.Series(collocations)
+
+def build_frequency_table_for_klk():
+  source_root_url = "https://raw.githubusercontent.com/kannera/keyword_course2021/main/klk_unigrams/"
+  res = dict()
+  for i in range(1860, 1900):
+    print(source_root_url+str(i)+".json")
+    data = download(source_root_url+str(i)+".json")
+    res[i] = data
+  tf = sum(download(query_frequencies("", "text_publ_type", "klk").replace("count", "count_all"))['total']['absolute'].values())
+  return pandas.DataFrame(res).fillna(1).sum(axis=1), tf
+
+def build_collocation_table(frequencies, tf, lemma, corpus, rang, crop):
+  collocations = list_collocations(lemma, corpus, 5)
+  collocations_df = pandas.DataFrame(collocations)
+  collocations_df['w2'] = frequencies
+  collocations_df['w1'] = collocations_df.loc[lemma]['w2']
+  collocations_df['w12'] = collocations_df[0]
+  collocations_df['tf'] = tf
+  collocations_df['pmi'] = collocations_df.apply(pmi, axis=1)
+  collocations_df['t-test'] = collocations_df.apply(t_test, axis=1)
+  collocations_df['llr'] = collocations_df.apply(llr, axis=1)
+  return collocations_df
+
+
+
 def pmi(X):
   w1 = X['w1']
   w2 = X['w2']
