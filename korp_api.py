@@ -54,7 +54,7 @@ def build_frequency_table(corpus):
 def build_frequency_table_for_s24():
   source_root_url = "https://raw.githubusercontent.com/kannera/keyword_course2021/main/s24_unigrams/"
   res = dict()
-  for i in range(1860, 1900):
+  for i in range(2001, 2020):
     print(source_root_url+str(i)+".json")
     data = download(source_root_url+str(i)+".json")
     res[i] = data
