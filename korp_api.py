@@ -45,6 +45,22 @@ def list_collocations(lemma, corpus, rang, crop=[]):
   collocations = collections.Counter(collocations)
   return pandas.Series(collocations)
 
+def build_frequency_table(corpus):
+  if corpus == "klk":
+    return build_frequency_table_for_klk()
+  elif corpus == "s24":
+    return build_frequency_table_for_s24()
+
+def build_frequency_table_for_s24():
+  source_root_url = "https://raw.githubusercontent.com/kannera/keyword_course2021/main/s24_unigrams/"
+  res = dict()
+  for i in range(1860, 1900):
+    print(source_root_url+str(i)+".json")
+    data = download(source_root_url+str(i)+".json")
+    res[i] = data
+  tf = sum(download(query_frequencies("", "text_empty", "klk").replace("count", "count_all"))['total']['absolute'].values())
+  return pandas.DataFrame(res).fillna(1).sum(axis=1), tf
+
 def build_frequency_table_for_klk():
   source_root_url = "https://raw.githubusercontent.com/kannera/keyword_course2021/main/klk_unigrams/"
   res = dict()
