@@ -52,8 +52,10 @@ def add_date_columns_for_klk(df):
   
   return df
 
-def query_frequencies(query, groupby, corpus):
+def query_frequencies(query, groupby, corpus, allfr=False):
   url_bits = [URL_COM.replace("COMMAND", "count"), URL_GROUPBY.replace("GROUPBY", groupby), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
+  
+    
   if corpus == "klk":
     url_bits.append(URL_CORPUS_KLK)
   elif corpus == "suomi24":
@@ -65,6 +67,8 @@ def query_frequencies(query, groupby, corpus):
   elif corpus == "coha":
     url_bits.append(URL_CORPUS_COHA)
   url = "&".join(url_bits)
+  if allfr:
+    url = url.replace("count", "count_all")
   return url
 
 def download(url):
