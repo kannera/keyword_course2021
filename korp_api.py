@@ -48,7 +48,7 @@ def list_collocations(lemma, corpus, rang, crop=[]):
 def build_frequency_table(corpus):
   if corpus == "klk":
     return build_frequency_table_for_klk()
-  elif corpus == "s24":
+  elif corpus == "suomi24":
     return build_frequency_table_for_s24()
 
 def build_frequency_table_for_s24():
@@ -59,7 +59,7 @@ def build_frequency_table_for_s24():
     data = download(source_root_url+str(i)+".json")
     res[i] = data
   print(query_frequencies("", "text_empty", "s24").replace("count", "count_all"))
-  tf = sum(download(query_frequencies("", "text_empty", "s24").replace("count", "count_all"))['total']['absolute'].values())
+  tf = sum(download(query_frequencies("", "text_empty", "suomi24").replace("count", "count_all"))['total']['absolute'].values())
   return pandas.DataFrame(res).fillna(1).sum(axis=1), tf
 
 def build_frequency_table_for_klk():
