@@ -61,7 +61,7 @@ def build_frequency_table_for_s24():
     data = download(source_root_url+str(i)+".json")
     res[i] = data
   print(query_frequencies("", "text_empty", "s24").replace("count", "count_all"))
-  tf = sum(download(query_frequencies("", "text_empty", "suomi24").replace("count", "count_all"))['total']['absolute'].values())
+  tf = sum(download(query_frequencies("", "", "suomi24").replace("count", "info"))['total_size'].values())
   return pandas.DataFrame(res).fillna(1).sum(axis=1), tf
 
 def build_frequency_table_for_klk():
@@ -71,7 +71,7 @@ def build_frequency_table_for_klk():
     print(source_root_url+str(i)+".json")
     data = download(source_root_url+str(i)+".json")
     res[i] = data
-  tf = sum(download(query_frequencies("", "text_publ_type", "klk").replace("count", "count_all"))['total']['absolute'].values())
+  tf = sum(download(query_frequencies("", "text_publ_type", "klk").replace("count", "info"))['total_size'].values())
   return pandas.DataFrame(res).fillna(1).sum(axis=1), tf
 
 def build_collocation_table(frequencies, tf, lemma, corpus, rang, crop):
