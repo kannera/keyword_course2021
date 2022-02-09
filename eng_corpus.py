@@ -70,7 +70,7 @@ def build_collocations(data, frequencies, lemma, rang, metrics):
   collocations['w2'] = frequencies
   collocations['tf'] = tf
   collocations['w1'] = frequencies.loc[lemma]
-  for m in metric:
+  for m in metrics:
     collocations[m] = collocations.apply(metric_map[m], axis=1)
     
   return collocations
