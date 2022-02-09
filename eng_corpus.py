@@ -4,6 +4,8 @@ from scipy.stats import binom
 import codecs
 import os
 
+metric_map = {"pmi": pmi, "llr":llr, "t-test":t_test}
+
 def pmi(X):
   w1 = X['w1']
   w2 = X['w2']
@@ -56,7 +58,7 @@ def get_kwic(data, lemma, title, rang):
       line.append(data['lemma'].iloc[ii])
     print(" ".join(line))
 
-def build_collocations(data, frequencies, lemma, rang):
+def build_collocations(data, frequencies, lemma, rang, metrics):
 
   collocations = list_collocations(data, lemma, rang)
   collocations = collocations.groupby('lemma').count()
@@ -66,9 +68,9 @@ def build_collocations(data, frequencies, lemma, rang):
   collocations['w2'] = frequencies
   collocations['tf'] = tf
   collocations['w1'] = frequencies.loc[lemma]
-  collocations['pmi'] = collocations.apply(pmi, axis=1)
-  collocations['llr'] = collocations.apply(llr, axis=1)
-  collocations['t-test'] = collocations.apply(t_test, axis=1)
+  for m in metric:
+    collocations[m] = collocations.apply(metric_map[m], axis=1)
+    
   return collocations
     
 def list_collocations(data, lemma, rang):
