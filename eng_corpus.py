@@ -4,7 +4,7 @@ from scipy.stats import binom
 import codecs
 import os
 
-metric_map = {"pmi": pmi, "llr":llr, "t-test":t_test}
+
 
 def pmi(X):
   w1 = X['w1']
@@ -49,6 +49,8 @@ def t_test(X):
   score = (ps - p0) / numpy.sqrt((ps/tf))
 
   return score
+
+metric_map = {"pmi": pmi, "llr":llr, "t-test":t_test}
 
 def get_kwic(data, lemma, title, rang):
   indices = data[(data.lemma == lemma) & (data.title==title)].index
