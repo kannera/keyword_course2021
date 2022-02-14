@@ -1,6 +1,6 @@
 from sklearn.manifold import MDS
 from sklearn.metrics.pairwise import cosine_distances
-
+SPACE_URL = "https://raw.githubusercontent.com/kannera/keyword_course2021/main/embeddings/CORPUS_5_pmi.csv"
 def get_wordspace(corpus):
   url = SPACE_URL.replace("CORPUS", corpus)
   tmp = wget.download(url)
