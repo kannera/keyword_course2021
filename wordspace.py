@@ -16,7 +16,8 @@ def get_wordspace(corpus):
   distances = cosine_distances(matrix)
   return distances, words
 
-def plot_wordspace(distances, words, lemma, N, other_words):
+def plot_wordspace(corpus, lemma, N, other_words):
+  distances, words = get_wordspace(corpus)
   neighbours = get_closest(lemma, distances, words, 600, other_words)
   subspace = get_subspace(distances, words, neighbours)
   mds = MDS(dissimilarity='precomputed')
@@ -30,7 +31,8 @@ def plot_wordspace(distances, words, lemma, N, other_words):
     plt.scatter(x,y)
   plt.show()
 
-def list_closest_neighbours(distances, lemma, words, N):
+def list_closest_neighbours(corpus, lemma, N):
+  distances, words = get_wordspace(corpus)
   neighbours = get_closest(lemma, distances, words, 600, "closest")
   n_dists = {w:distances[words.index(lemma)][words.index(w)] for w in neighbours}
   for k,v in sorted(n_dists.items(), key=lambda x:x[1])[:N]:
