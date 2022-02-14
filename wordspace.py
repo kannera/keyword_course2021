@@ -47,3 +47,14 @@ def get_closest(lemma, distances, words, N, sample="closest"):
 def get_subspace(distances, words, subset):
   subspace_indices = [words.index(w) for w in subset]
   return [[distances[i][ii] for ii in subspace_indices] for i in subspace_indices]
+
+def compare_distances(A, B, corpora):
+  for c in corpora:
+    distances, words = get_wordspace(c)
+    if A not in words:
+      print(A, "not in",c,"wordspace")
+      return True
+    if B not in words:
+      print(B, "not in",c,"wordspace")
+      return True
+    print(c, A, "to", B, distances[words.index(A)][words.index(B)])
