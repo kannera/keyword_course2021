@@ -32,7 +32,7 @@ def plot_wordspace(distances, words, lemma, N, other_words):
 
 def list_closest_neighbours(distances, lemma, words, N):
   neighbours = get_closest(lemma, distances, words, 600, "closest")
-  n_dists = {w:distances[words.index[lemma]][words.index[w]] for w in neighbours}
+  n_dists = {w:distances[words.index(lemma)][words.index(w)] for w in neighbours}
   for k,v in sorted(n_dists.items(), key=lambda x:x[1])[:N]:
     print(k, "\t", v)
   
