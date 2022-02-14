@@ -1,5 +1,6 @@
 from sklearn.manifold import MDS
 from sklearn.metrics.pairwise import cosine_distances
+import matplotlib.pyplot as plt
 import wget, json, os , sys, re
 
 SPACE_URL = "https://raw.githubusercontent.com/kannera/keyword_course2021/main/embeddings/CORPUS_5_pmi.csv"
