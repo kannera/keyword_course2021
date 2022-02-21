@@ -56,7 +56,7 @@ def read_text(corpus, text_id):
 def query_texts_from_git(text_id):
   METADATA_URL = "https://raw.githubusercontent.com/kannera/keyword_course2021/main/glowbe_metadata.tsv"
   TEXT_URL = "https://raw.githubusercontent.com/kannera/keyword_course2021/main/glowbe/COUNTRY_1.txt"
-   tmp = wget.download(METADATA_URL)
+  tmp = wget.download(METADATA_URL)
   metadata = pandas.read_csv(tmp, index_col=0, sep="\t")
   os.remove(tmp)
   country = metadata.loc[int(text_id)]['country|genre'].split(" ")[0].lower()
