@@ -22,7 +22,7 @@ def download_topic_model(corpus, n_topics):
 def print_series_side_by_side(A, B):
   
   for a,b in zip(A.index, B.index):
-    line = [str(a), str(round(A.loc[a], 2)), str(b), str(round(A.loc[a], 2))]
+    line = [str(a), str(round(A.loc[a], 2)), str(b), str(round(B.loc[a], 2))]
     line = [x+blanks(20-len(x)) for x in line]
     print("".join(line))
 
