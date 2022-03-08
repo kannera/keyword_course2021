@@ -198,6 +198,7 @@ def parse_date(x):
 def get_frequency_data_from_korp(query, groupby, corpus, sums=False):
   
   url = query_frequencies(query, groupby, corpus)
+  print(url)
   data = download(url)
   if sums:
     return {"abs_frequency":data['total']['sums']['absolute'], "rel_frequency":data['total']['sums']['relative']}
