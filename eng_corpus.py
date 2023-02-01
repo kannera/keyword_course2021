@@ -64,7 +64,10 @@ def t_test(X):
 metric_map = {"pmi": pmi, "llr":llr, "t-test":t_test}
 
 def get_kwic(data, lemma, title, rang):
-  indices = data[(data.lemma == lemma) & (data.title==title)].index
+  if title:
+    indices = data[(data.lemma == lemma) & (data.title==title)].index
+  else:
+    indices = data[(data.lemma == lemma)].index
   for i in indices:
     line = []
     for ii in range(i-rang, i+rang):
