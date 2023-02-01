@@ -4,7 +4,7 @@ from scipy.stats import binom
 import codecs
 import os
 
-def build_cookie(nameA, valueA, nameB, valueB):
+def build_cookie(cookies):
   
   domain = "korp.csc.fi"
   path = "/"
@@ -12,11 +12,17 @@ def build_cookie(nameA, valueA, nameB, valueB):
   HttpOnly = "TRUE"
   secure = "FALSE"
   
-  line = "\t".join([domain, HttpOnly, path, secure, expires, nameA, valueA])+"\n" +"\t".join([domain, HttpOnly, path, secure, expires, nameB, valueB])
+  res = ""
+  for cook in cookies:
+    name, value = cook
+    res+="\t".join([domain, HttpOnly, path, secure, expires, name, value])+"\n"
+  
+  
 
   with open("cookies.txt", "w", encoding="utf-8") as f:
-    f.write(line)
-
+    f.write(res)
+    
+    
 def pmi(X):
   w1 = X['w1']
   w2 = X['w2']
