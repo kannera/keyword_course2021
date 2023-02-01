@@ -12,15 +12,15 @@ def build_cookie(cookies):
   HttpOnly = "TRUE"
   secure = "TRUE"
   
-  res = ""
+  res = []
   for cook in cookies:
     name, value = cook
-    res+="\t".join([domain, HttpOnly, path, secure, expires, name, value])+"\n"
+    res.append("\t".join([domain, HttpOnly, path, secure, expires, name, value]))
   
   
 
   with open("cookies.txt", "w", encoding="utf-8") as f:
-    f.write(res)
+    f.write("\n".join(res))
     
     
 def pmi(X):
