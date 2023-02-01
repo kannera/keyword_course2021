@@ -4,7 +4,18 @@ from scipy.stats import binom
 import codecs
 import os
 
+def build_cookie(nameA, valueA, nameB, valueB):
+  
+  domain = "korp.csc.fi"
+  path = "/"
+  expires = "Session"
+  HttpOnly = "TRUE"
+  secure = "FALSE"
+  
+  line = "\t".join([domain, HttpOnly, path, secure, expires, nameA, valueA])+"\n" +"\t".join([domain, HttpOnly, path, secure, expires, nameB, valueB])
 
+  with open("cookies.txt", "w", encoding="utf-8") as f:
+    f.write(line)
 
 def pmi(X):
   w1 = X['w1']
