@@ -189,7 +189,7 @@ def download(url):
   with codecs.open("tmp.json", "r", encoding="utf-8", errors="replace") as f:
     data = json.load(f)
   #os.remove("tmp.json")
-  os.remove(tmp)
+  #os.remove(tmp)
   return data
 
 def parse_date(x):
