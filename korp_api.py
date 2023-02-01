@@ -184,7 +184,7 @@ def query_frequencies(query, groupby, corpus, allfr=False):
   return url
 
 def download(url):
-  os.system("wget --load-cookies=cookies.txt "+'"'+url+'"'+ " -O tmp.json")
+  os.system('wget --load-cookies=cookies.txt "'+url+'" -O tmp.json')
   #tmp = wget.download(url, out="tmp.json")
   with codecs.open("tmp.json", "r", encoding="utf-8", errors="replace") as f:
     data = json.load(f)
