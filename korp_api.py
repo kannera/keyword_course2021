@@ -211,7 +211,7 @@ def get_frequency_data_from_korp(query, groupby, corpus, sums=False):
     key = "combined"
   
   if sums:
-    return {"abs_frequency":data[key]['sums']['absolute'], "rel_frequency":data['total']['sums']['relative']}
+    return {"abs_frequency":data[key]['sums']['absolute'], "rel_frequency":data[key]['sums']['relative']}
   else:
     data = [{groupby:k, "rel_frequency":v, "abs_frequency":data[key]['absolute'][k]} for k,v in data[key]['relative'].items()]
     df = pandas.DataFrame(data)
