@@ -11,7 +11,7 @@ import time
 
 
 URL_COM = "https://korp.csc.fi/korp/api8/COMMAND?defaultcontext=DEFAULT_CONTEXT&cache=true"
-URL_GROUPBY = "groupby=GROUPBY"
+URL_GROUPBY = "group_by=GROUPBY"
 URL_SHOW = "show=SHOW"
 URL_STRUCT_KLK = "show_struct=text_label.text_publ_(title.id).text_issue_(date.no.title).text_(elec_date.language.page_no.sentcount.tokencount.img_url.publ_type).paragraph_id.sentence_(id.parse_state.local_id).text_binding_id.text_page_image_(url.context_url).text_download_pdf_url"
 URL_START_END = "&start=START&end=END"
