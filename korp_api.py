@@ -205,10 +205,15 @@ def get_frequency_data_from_korp(query, groupby, corpus, sums=False):
   url = query_frequencies(query, groupby, corpus)
   print(url)
   data = download(url)
+  
+  key = "total"
+  if key not in data:
+    key = "combined"
+  
   if sums:
-    return {"abs_frequency":data['total']['sums']['absolute'], "rel_frequency":data['total']['sums']['relative']}
+    return {"abs_frequency":data[key]['sums']['absolute'], "rel_frequency":data['total']['sums']['relative']}
   else:
-    data = [{groupby:k, "rel_frequency":v, "abs_frequency":data['total']['absolute'][k]} for k,v in data['total']['relative'].items()]
+    data = [{groupby:k, "rel_frequency":v, "abs_frequency":data[key]['absolute'][k]} for k,v in data[key]['relative'].items()]
     df = pandas.DataFrame(data)
   if corpus == "klk" and "text_issue_date" in df.columns:
     return add_date_columns_for_klk(df)
