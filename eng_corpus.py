@@ -10,7 +10,7 @@ def build_cookie(cookies):
   path = "/"
   expires = "Session"
   HttpOnly = "TRUE"
-  secure = "FALSE"
+  secure = "TRUE"
   
   res = ""
   for cook in cookies:
