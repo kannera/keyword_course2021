@@ -200,15 +200,24 @@ def parse_date(x):
   return x[-1]+"-"+x[1]+"-"+x[0]
 
 #THIS IS USED IN THE ASSIGNMENT:frequencies NOTEBOOK
-def get_frequency_data_from_korp(query, groupby, corpus, sums=False):
+def get_frequency_data_from_korp(query, groupby, corpus, sums=False, mode=False):
+  
   
   url = query_frequencies(query, groupby, corpus)
   print(url)
-  data = download(url)
+  if not mode:
+    data = download(url)
   
+  elif mode == "url":
+    return url
+  
+  else:
+    with open(input, "r", encoding="utf-8") as f:
+      data = json.load(f)
+      
   key = "total"
   if key not in data:
-    key = "combined"
+  key = "combined"
   
   if sums:
     return {"abs_frequency":data[key]['sums']['absolute'], "rel_frequency":data[key]['sums']['relative']}
