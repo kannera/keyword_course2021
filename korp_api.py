@@ -217,7 +217,7 @@ def get_frequency_data_from_korp(query, groupby, corpus, sums=False, mode=False)
       
   key = "total"
   if key not in data:
-  key = "combined"
+    key = "combined"
   
   if sums:
     return {"abs_frequency":data[key]['sums']['absolute'], "rel_frequency":data[key]['sums']['relative']}
