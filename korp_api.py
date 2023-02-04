@@ -216,8 +216,7 @@ def get_frequency_data_from_korp(query, groupby, corpus, sums=False, mode=False)
       data = json.load(f)
       
   key = "total"
-  if key not in data:
-    key = "combined"
+  if key not in data: key = "combined"
   
   if sums:
     return {"abs_frequency":data[key]['sums']['absolute'], "rel_frequency":data[key]['sums']['relative']}
