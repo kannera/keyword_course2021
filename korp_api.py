@@ -15,8 +15,8 @@ URL_GROUPBY = "group_by=GROUPBY"
 URL_SHOW = "show=SHOW"
 URL_STRUCT_KLK = "show_struct=text_label.text_publ_(title.id).text_issue_(date.no.title).text_(elec_date.language.page_no.sentcount.tokencount.img_url.publ_type).paragraph_id.sentence_(id.parse_state.local_id).text_binding_id.text_page_image_(url.context_url).text_download_pdf_url"
 URL_START_END = "&start=START&end=END"
-URL_CORPUS_KLK = "corpus=" + "%2C".join([f"KLK_FI_{i}" for i in range(1860,1900)]
-URL_CORPUS_S24 = "corpus=" + "%2C".join([f"S24_{i}" for i in range(2000,2021)]
+URL_CORPUS_KLK = "corpus=" + "%2C".join([f"KLK_FI_{i}" for i in range(1860,1900)])
+URL_CORPUS_S24 = "corpus=" + "%2C".join([f"S24_{i}" for i in range(2000,2021)])
 #GlobWE text_country, text_year, text_genre
 URL_CORPUS_GLOBWE = "corpus=GLOWBE_(US_GENL.US_BLOG.CA_GENL.CA_BLOG.GB_GENL.GB_BLOG.IE_GENL.IE_BLOG.AU_GENL.AU_BLOG.NZ_GENL.NZ_BLOG.IN_GENL.IN_BLOG.LK_GENL.LK_BLOG.PK_GENL.PK_BLOG.BD_GENL.BD_BLOG.SG_GENL.SG_BLOG.MY_GENL.MY_BLOG.PH_GENL.PH_BLOG.HK_GENL.HK_BLOG.ZA_GENL.ZA_BLOG.NG_GENL.NG_BLOG.GH_GENL.GH_BLOG.KE_GENL.KE_BLOG.TZ_GENL.TZ_BLOG.JM_GENL.JM_BLOG)"
 #COHA text_genre, text_year
