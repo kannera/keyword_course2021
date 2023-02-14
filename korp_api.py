@@ -191,7 +191,7 @@ def download(url):
   tmp = wget.download(url, out="tmp.json")
   with codecs.open("tmp.json", "r", encoding="utf-8", errors="replace") as f:
     data = json.load(f)
-  print(data)
+  
   #os.remove("tmp.json")
   os.remove(tmp)
   return data
