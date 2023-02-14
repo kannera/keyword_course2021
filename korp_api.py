@@ -13,7 +13,7 @@ import time
 URL_COM = "https://korp.csc.fi/korp/api8/COMMAND?defaultcontext=DEFAULT_CONTEXT&cache=true"
 URL_GROUPBY = "group_by=GROUPBY"
 URL_SHOW = "show=SHOW"
-URL_STRUCT_KLK = "show_struct="show_struct=text_label%2Ctext_publ_title%2Ctext_publ_id%2Ctext_issue_date%2Ctext_issue_no%2Ctext_issue_title%2Ctext_elec_date%2Ctext_language%2Ctext_page_no%2Ctext_sentcount%2Ctext_tokencount%2Ctext_img_url%2Ctext_publ_type%2Cparagraph_id%2Csentence_id%2Csentence_parse_state%2Csentence_local_id%2Ctext_binding_id"
+URL_STRUCT_KLK = "show_struct=text_label%2Ctext_publ_title%2Ctext_publ_id%2Ctext_issue_date%2Ctext_issue_no%2Ctext_issue_title%2Ctext_elec_date%2Ctext_language%2Ctext_page_no%2Ctext_sentcount%2Ctext_tokencount%2Ctext_img_url%2Ctext_publ_type%2Cparagraph_id%2Csentence_id%2Csentence_parse_state%2Csentence_local_id%2Ctext_binding_id"
 URL_START_END = "&start=START&end=END"
 URL_CORPUS_KLK = "corpus=" + "%2C".join([f"KLK_FI_{i}" for i in range(1860,1900)])
 URL_CORPUS_S24 = "corpus=" + "%2C".join([f"S24_{i}" for i in range(2001,2021)])
