@@ -71,6 +71,7 @@ def build_frequency_table_for_klk():
     print(source_root_url+str(i)+".json")
     data = download(source_root_url+str(i)+".json")
     res[i] = data
+  print(query_frequencies("", "text_publ_type", "klk").replace("count", "corpus_info"))
   tf = download(query_frequencies("", "text_publ_type", "klk").replace("count", "corpus_info"))['total_size']
   return pandas.DataFrame(res).fillna(1).sum(axis=1), tf
 
