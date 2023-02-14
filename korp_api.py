@@ -189,7 +189,7 @@ def download(url):
   #  print([x for x in f])
   #os.system('wget --load-cookies=cookies.txt "'+url+'" -O tmp.json')
   tmp = wget.download(url, out="tmp.json")
-  with codecs.open("tmp.json", "r", encoding="utf-8", errors="replace") as f:
+  with codecs.open(tmp, "r", encoding="utf-8", errors="replace") as f:
     data = json.load(f)
   
   #os.remove("tmp.json")
