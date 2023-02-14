@@ -13,7 +13,7 @@ import time
 URL_COM = "https://korp.csc.fi/korp/api8/COMMAND?defaultcontext=DEFAULT_CONTEXT&cache=true"
 URL_GROUPBY = "group_by=GROUPBY"
 URL_SHOW = "show=SHOW"
-URL_STRUCT_KLK = "show_struct=text_label.text_publ_(title.id).text_issue_(date.no.title).text_(elec_date.language.page_no.sentcount.tokencount.img_url.publ_type).paragraph_id.sentence_(id.parse_state.local_id).text_binding_id.text_page_image_(url.context_url).text_download_pdf_url"
+URL_STRUCT_KLK = "show_struct="show_struct=text_label%2Ctext_publ_title%2Ctext_publ_id%2Ctext_issue_date%2Ctext_issue_no%2Ctext_issue_title%2Ctext_elec_date%2Ctext_language%2Ctext_page_no%2Ctext_sentcount%2Ctext_tokencount%2Ctext_img_url%2Ctext_publ_type%2Cparagraph_id%2Csentence_id%2Csentence_parse_state%2Csentence_local_id%2Ctext_binding_id"
 URL_START_END = "&start=START&end=END"
 URL_CORPUS_KLK = "corpus=" + "%2C".join([f"KLK_FI_{i}" for i in range(1860,1900)])
 URL_CORPUS_S24 = "corpus=" + "%2C".join([f"S24_{i}" for i in range(2001,2021)])
@@ -236,9 +236,10 @@ def read_occurrences(query, corpus,n):
   return data["kwic"]
 
 def query_occurrences(query, corpus, n, start=0, context="1+sentence", show=""):
-  url_bits = [URL_COM.replace("COMMAND", "query").replace("DEFAULT_CONTEXT",context), URL_SHOW.replace("SHOW", show), URL_STRUCT_KLK, URL_START_END.replace("END", str(n)).replace("START", str(start)), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
+  url_bits = [URL_COM.replace("COMMAND", "query").replace("DEFAULT_CONTEXT",context), URL_SHOW.replace("SHOW", show), URL_START_END.replace("END", str(n)).replace("START", str(start)), URL_QUERY.replace("QUERY", urllib.parse.quote_plus(query)), URL_ENDBITS]
   if corpus == "klk":
     url_bits.append(URL_CORPUS_KLK)
+    url_bits.append(URL_STRUCT_KLK)
   elif corpus == "suomi24":
     url_bits.append(URL_CORPUS_S24)
   elif corpus == "globwe":
