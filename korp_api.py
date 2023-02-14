@@ -61,7 +61,7 @@ def build_frequency_table_for_s24():
     data = download(source_root_url+str(i)+".json")
     res[i] = data
   print(query_frequencies("", "text_empty", "s24").replace("count", "count_all"))
-  tf = download(query_frequencies("", "", "suomi24").replace("count", "info"))['total_size']
+  tf = download(query_frequencies("", "", "suomi24").replace("count", "corpus_info"))['total_size']
   return pandas.DataFrame(res).fillna(1).sum(axis=1), tf
 
 def build_frequency_table_for_klk():
