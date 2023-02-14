@@ -171,7 +171,7 @@ def query_frequencies(query, groupby, corpus, allfr=False):
     
   if corpus == "klk":
     url_bits.append(URL_CORPUS_KLK)
-  elif corpus == "suomi24":
+  elif corpus == "suomi24" or corpus == "s24":
     url_bits.append(URL_CORPUS_S24)
   elif corpus == "globwe":
     url_bits.append(URL_CORPUS_GLOBWE)
