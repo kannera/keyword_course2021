@@ -32,7 +32,10 @@ def list_collocations(lemma, corpus, rang, crop=[]):
     crop=[crop]
   query = '[lemma="'+lemma+'"'+' & '.join([x.split(":")[0]+'='+'"'+x.split(":")[1]+'"' for x in crop])+']'
   print(query)
-  count_occurrences = download(query_occurrences(query, corpus, "1"))['hits']
+  url = query_occurrences(query, corpus, "1")
+  print(url)
+  count_occurrences = download(url)
+  count_occurrences = count_occurrences['hits']
   collocations = []
   for i in range(0, count_occurrences, 100000):
     t0 = time.time()
