@@ -95,7 +95,7 @@ def build_collocations(data, frequencies, lemma, rang, metrics):
     collocations[m] = collocations.apply(metric_map[m], axis=1)
     
   return collocations
-def get_kwic_lines(data, lemmaA, lemmaB=False, rang=5, n=10, year=False):
+def get_kwic_lines(data, lemma, lemmaB=False, rang=5, n=10, year=False):
 
   if year:
     data = data[data.year==year]
