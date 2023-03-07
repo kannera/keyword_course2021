@@ -117,7 +117,7 @@ def get_kwic_lines(data, lemma, lemmaB=False, rang=5, n=10, year=False):
   
   if lemmaB:
     pattern = re.compile(lemmaB.lower())
-    colloc_texts = [x for x in colloc_texts if re.search(pattern, x.lower()) != None]
+    colloc_texts = [x for x in colloc_texts if re.search(pattern, x['pre text'].lower()) != None or re.search(pattern, x['post text'].lower()) != None]
 
   if n > len(colloc_texts):
     return colloc_texts
