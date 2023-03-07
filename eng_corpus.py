@@ -3,6 +3,7 @@ import pandas, numpy
 from scipy.stats import binom
 import codecs
 import os
+import random
 
 def build_cookie(cookies):
   
