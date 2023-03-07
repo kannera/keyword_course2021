@@ -94,7 +94,37 @@ def build_collocations(data, frequencies, lemma, rang, metrics):
     collocations[m] = collocations.apply(metric_map[m], axis=1)
     
   return collocations
-    
+def get_kwic(data, lemmaA, lemmaB=False, rang=5, n=10, year=False):
+
+  if year:
+    data = data[data.year==year]
+
+  
+  lemma_data = data[data.lemma == lemma]
+  texts = lemma_data['text_id'].unique()
+  colloc_data = data[data.text_id.isin(texts)]
+  indices = lemma_data.index
+  set_indices = list(set(indices))
+  max_index = max(data.index)
+  colloc_indices = []
+  colloc_indices = [list(range(max(0,i-rang), min(i+rang, max_index))) for i in set_indices]
+  print(colloc_indices)
+  colloc_texts = [{"pre text":" ".join(list(data.iloc[x[:rang]]['word'])), 
+                   "keyword":data.iloc[x[rang]]['word'],
+                   "post text":" ".join(list(data.iloc[x[rang+1:]]['word'])),
+                   "title":data.iloc[y]['title']} for x,y in zip(colloc_indices, set_indices)]
+  
+  if lemmaB:
+    pattern = re.compile(lemmaB.lower())
+    colloc_texts = [x for x in colloc_texts if re.search(pattern, x.lower()) != None]
+
+  if n > len(colloc_texts):
+    return colloc_texts
+
+  else:
+    return random.sample(colloc_texts, n)
+  
+  
 def list_collocations(data, lemma, rang):
   lemma_data = data[data.lemma == lemma]
   texts = lemma_data['text_id'].unique()
