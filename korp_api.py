@@ -141,8 +141,10 @@ def query_full_corpus_sizes(corpus, query=""):
     url = query_frequencies(query, "text_issue_date", "klk")
     if query == "":
       url = url.replace("count", "count_all")
-    data = download(url)['total']['absolute']
-    data = [{"text_issue_date":k, "frequency":v} for k,v in data.items()]
+    data = download(url)['combined']['rows']
+    #return data
+    #data = data.keys['sums']['absolute']
+    data = [{"text_issue_date":x['value']['text_issue_date'][0], "frequency":x['absolute']} for x in data]
     data = pandas.DataFrame(data)
     if "text_issue_date" in data.columns:
       data = add_date_columns_for_klk(data)
@@ -207,7 +209,6 @@ def parse_date(x):
 #THIS IS USED IN THE ASSIGNMENT:frequencies NOTEBOOK
 def get_frequency_data_from_korp(query, groupby, corpus, sums=False, mode=False):
   
-  
   url = query_frequencies(query, groupby, corpus)
   print(url)
   if not mode:
@@ -226,7 +227,10 @@ def get_frequency_data_from_korp(query, groupby, corpus, sums=False, mode=False)
   if sums:
     return {"abs_frequency":data[key]['sums']['absolute'], "rel_frequency":data[key]['sums']['relative']}
   else:
-    data = [{groupby:k, "rel_frequency":v, "abs_frequency":data[key]['absolute'][k]} for k,v in data[key]['relative'].items()]
+    #return data
+    if key == "combined":
+      data = data[key]["rows"]
+    data = [{groupby:x['value'][groupby][0], "rel_frequency":x['relative'], "abs_frequency":x['absolute']} for x in data]
     df = pandas.DataFrame(data)
   if corpus == "klk" and "text_issue_date" in df.columns:
     return add_date_columns_for_klk(df)
