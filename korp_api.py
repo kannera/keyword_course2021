@@ -43,7 +43,7 @@ def list_collocations(lemma, corpus, rang, crop=[]):
     end = min(count_occurrences, start+99999)
     url = query_occurrences(query, corpus, end, start=start, context=str(rang)+'+words', show="lemma")
     occurrences = download(url)['kwic']
-    collocations.extend([y['lemma'] for x in occurrences for y in x['tokens']])
+    collocations.extend([y['lemma'] for x in occurrences for y in x['tokens'] if "lemma" in y])
     print(time.time()-t0)
   
 
